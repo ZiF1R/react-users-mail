@@ -17,17 +17,16 @@ function Messages({ currentUser, setCurrentUser }) {
 
   useEffect(() => {
     if (currentUser) {
-      userService
-        .getAllUsersBySenderId()
-        .then(data => {
-          const map = new Map();
-          data.users.forEach(user => {
-            map.set(user.sender_id, user);
-          });
-          setSenders(map);
-        });
-
       const getMessages = () => {
+        userService
+          .getAllUsersBySenderId()
+          .then(data => {
+            const map = new Map();
+            data.users.forEach(user => {
+              map.set(user.sender_id, user);
+            });
+            setSenders(map);
+          });
         userService
           .getUserMessages(currentUser)
           .then(data => {
