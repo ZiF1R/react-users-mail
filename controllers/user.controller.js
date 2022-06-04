@@ -47,7 +47,7 @@ class UserController {
     const sendedMessage = await db.query(`INSERT INTO messages
       (title, message, sender_id, receiver_id, reply_message_id, created_date)
       values ($1, $2, $3, $4, null, $5) RETURNING *`,
-      [title, message, sender_id, receiver_id, getFormattedDateTime(new Date())]
+      [title, message, sender_id, receiver_id, new Date().toLocaleString()]
     );
 
     res.json({ message: sendedMessage.rows[0] });
@@ -73,18 +73,6 @@ class UserController {
     );
     res.json({ message: message.rows[0] });
   }
-}
-
-function getFormattedDateTime(dateTime) {
-  const date = dateTime.toDateString();
-
-  const getTimeNumberFormat = (num) => num < 10 ? "0" + num : num;
-  
-  const hours = getTimeNumberFormat(dateTime.getHours());
-  const minutes = getTimeNumberFormat(dateTime.getMinutes());
-  const seconds = getTimeNumberFormat(dateTime.getSeconds());
-  
-  return `${date}, ${hours}:${minutes}:${seconds}`;
 }
 
 module.exports = new UserController();
