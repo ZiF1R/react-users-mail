@@ -30,8 +30,8 @@ function SendMessage({ currentUser }) {
 
       if (reply_to) {
         setSelectedUsers([{
-          id: reply_to.receiver_id,
-          name: reply_to.receiver
+          id: reply_to.sender_id,
+          name: reply_to.sender
         }]);
       }
     }
