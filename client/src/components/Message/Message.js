@@ -1,6 +1,7 @@
 import { Button } from "primereact/button";
 import { Divider } from 'primereact/divider';
 import { SplitButton } from 'primereact/splitbutton';
+import { Editor } from 'primereact/editor';
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import userService from "../../services/user.service";
@@ -78,7 +79,9 @@ function Message({ currentUser }) {
         <i className="pi pi-envelope" style={{ marginRight: 7, opacity: 0.4, fontSize: 12 }} />
         <small className="divider__text">Message</small>
       </Divider>
-      <section className="message__body" dangerouslySetInnerHTML={{__html: message?.message }} />
+      
+      <Editor readOnly="true" headerTemplate={[]} style={{ width: 640 }} value={message?.message} disabled />
+      {/* <section className="message__body" dangerouslySetInnerHTML={{__html: message?.message }} /> */}
     </div>
   );
 }
